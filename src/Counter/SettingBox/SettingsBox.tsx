@@ -14,10 +14,10 @@ type SettingCounterPropsType = {
 export function SettingCounter(props: SettingCounterPropsType) {
 
     const disableModSet = () => {
-        return settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMin === settingValueMax || settingValueMax < 0;
+        return settingValueMin === null || settingValueMax === null || settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMin === settingValueMax || settingValueMax < 0 ;
     }
 
-    const initialState = restoreState<Array<number>>('save setting', [])
+    const initialState = restoreState<Array<number>>('save setting', [0,0])
     console.log(initialState)
 
     let [settingValueMin, setSettingValueMin] = useState(initialState[0])
