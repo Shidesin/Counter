@@ -14,9 +14,10 @@ export const CounterDisplay = (props:PropsType ) => {
 
     let correctDisplay = ErrorMessage ? ErrorMessage : props.valueCounter
 
+     let correctDisplayStyle = (props.valueCounter < 0 && props.valueCounter < props.MaxValueNumber) || (props.valueCounter < 0 && props.valueCounter < props.MaxValueNumber) || (props.valueCounter ===  props.MaxValueNumber) || (props.valueCounter > props.MaxValueNumber) ?  `${'end_number'}`: `${'display_box'}`
 
     return (
-        <div className= {props.valueCounter < props.MaxValueNumber ? `${'display_box'}` : `${'end_number'}`} >
+        <div className = {correctDisplayStyle} >
             {correctDisplay}
         </div>
     )

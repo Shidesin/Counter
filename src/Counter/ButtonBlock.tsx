@@ -4,7 +4,7 @@ type PropsType = {
     title: string
     onClickFunction: () => void
     disableMod: boolean
-    disableModSet?: () => boolean
+    // disableModSet?: () => boolean
 }
 
 

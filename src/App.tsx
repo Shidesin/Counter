@@ -19,25 +19,18 @@ export function App() {
     const initialState = restoreState<Array<number>>('save setting', [0,0])
 
     let [settingValueMin, setSettingValueMin] = useState(initialState[0])
+
     let [settingValueMax, setSettingValueMax] = useState(initialState[1])
-
-
 
     let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
 
     let [error, setError] = useState<string>("Input values and click 'set'")
 
-
-    // const callBack = (value: Array<number>) => setMinMaxValue(value);
-
-    // const callBackError = (value: string) => setError(value)
-
-    const disableModSet = () => {
-        errorSet()
-        return settingValueMin === null || settingValueMax === null || settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMin === settingValueMax || settingValueMax < 0 ;
-    }
-
     let array = [settingValueMin, settingValueMax]
+
+    const setButtonFunc = () => {
+        saveState<Array<number>>('save setting',array )
+    }
 
     const errorSet = () => {
         if ( settingValueMin < 0 || settingValueMin > settingValueMax  || settingValueMax < 0) {
@@ -49,8 +42,18 @@ export function App() {
         }
     }
 
-    const setButtonFunc = () => {
-        saveState<Array<number>>('save setting',array )
+    const disableModSet = () => {
+        errorSet()
+        return (
+            (settingValueMax < 0) ||
+            (settingValueMin < 0) ||
+            (settingValueMin > settingValueMax) ||
+            (settingValueMin === settingValueMax) ||
+            (settingValueMax === 0 && settingValueMin < 0) ||
+            (settingValueMax < 0 && settingValueMin < 0) ||
+            (settingValueMax > 0 && settingValueMin < 0) ||
+            (settingValueMax > 0 && settingValueMin < 0)
+        )
     }
 
     return (

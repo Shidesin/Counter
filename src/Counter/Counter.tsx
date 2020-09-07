@@ -5,7 +5,6 @@ import './Counter.css';
 
 
 type CounterPropsType = {
-    minMaxValue?: Array<number>
     valueCounter: number
     setCounterValue: (value: number) => void
     ErrorMessage: string
@@ -20,8 +19,12 @@ export const Counter = (props: CounterPropsType) => {
     const MaxValueNumber = props.settingValueMax;
 
 
-    let disableModInc: boolean;
-    props.valueCounter < MaxValueNumber ? disableModInc = false : disableModInc = true;
+    let disableModInc: boolean = (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter ===  MaxValueNumber) || (props.valueCounter > MaxValueNumber) ? true : false;
+
+    //(props.valueCounter < MaxValueNumber)
+    // (props.valueCounter < 0 && props.valueCounter < MaxValueNumber)
+    // (props.valueCounter ===  MaxValueNumber)
+
 
     let disableModReset: boolean;
     props.valueCounter !== MinValueNumber ? disableModReset = false : disableModReset = true;
