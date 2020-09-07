@@ -7,39 +7,70 @@ export function saveState<T>(key: string, state: T) {
     const stateAsString = JSON.stringify(state);
     localStorage.setItem(key, stateAsString)
 }
-
 export function restoreState<T>(key: string, defaultState: T) {
     const stateAsString = localStorage.getItem(key);
     if (stateAsString !== null) defaultState = JSON.parse(stateAsString) as T;
     return defaultState;
 }
 
+
 export function App() {
 
-    let [minMaxValue, setMinMaxValue] = useState<Array<number>>([]);
+    const initialState = restoreState<Array<number>>('save setting', [0,0])
 
-    let [valueCounter, setCounterValue] = useState<number>(minMaxValue[0]);
+    let [settingValueMin, setSettingValueMin] = useState(initialState[0])
+    let [settingValueMax, setSettingValueMax] = useState(initialState[1])
 
-    let [error, setError] = useState<string>('Input values and click set')
 
 
-    let callBack = (value: Array<number>) => setMinMaxValue(value);
+    let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
 
-    const callBackError = (value: string) => setError(value)
+    let [error, setError] = useState<string>("Input values and click 'set'")
 
+
+    // const callBack = (value: Array<number>) => setMinMaxValue(value);
+
+    // const callBackError = (value: string) => setError(value)
+
+    const disableModSet = () => {
+        errorSet()
+        return settingValueMin === null || settingValueMax === null || settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMin === settingValueMax || settingValueMax < 0 ;
+    }
+
+    let array = [settingValueMin, settingValueMax]
+
+    const errorSet = () => {
+        if ( settingValueMin < 0 || settingValueMin > settingValueMax  || settingValueMax < 0) {
+            setError('Incorrect value')
+        } else if(settingValueMin === settingValueMax) {
+            setError("Input values and click 'set'")
+        } else {
+            setError('')
+        }
+    }
+
+    const setButtonFunc = () => {
+        saveState<Array<number>>('save setting',array )
+    }
 
     return (
         <div className="App">
             <SettingCounter
-                callBackError={callBackError}
-                callback={callBack}
+                callbackValueMin={setSettingValueMin}
+                callbackValueMax={setSettingValueMax}
                 setCounterValue={setCounterValue}
+                disableModSet={disableModSet}
+                setButtonFunc={setButtonFunc}
+                settingValueMin={settingValueMin}
+                settingValueMax={settingValueMax}
+                errorSet={errorSet}
             />
             <Counter
-                minMaxValue={minMaxValue}
                 valueCounter={valueCounter}
                 setCounterValue={setCounterValue}
                 ErrorMessage={error}
+                settingValueMin={settingValueMin}
+                settingValueMax={settingValueMax}
             />
         </div>
     );

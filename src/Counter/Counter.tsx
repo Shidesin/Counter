@@ -3,20 +3,21 @@ import {CounterDisplay} from './CounterDisplay';
 import {Button} from './ButtonBlock';
 import './Counter.css';
 
+
 type CounterPropsType = {
-    minMaxValue: Array<number>
+    minMaxValue?: Array<number>
     valueCounter: number
     setCounterValue: (value: number) => void
     ErrorMessage: string
+    settingValueMin: number
+    settingValueMax: number
 }
 
 export const Counter = (props: CounterPropsType) => {
 
 
-    const MinValueNumber = props.minMaxValue[0];
-    const MaxValueNumber = props.minMaxValue[1];
-
-
+    const MinValueNumber = props.settingValueMin;
+    const MaxValueNumber = props.settingValueMax;
 
 
     let disableModInc: boolean;
@@ -32,7 +33,8 @@ export const Counter = (props: CounterPropsType) => {
 
     return (
         <div className={'counter_box'}>
-            <CounterDisplay ErrorMessage={props.ErrorMessage} valueCounter={props.valueCounter} MaxValueNumber={MaxValueNumber}/>
+            <CounterDisplay ErrorMessage={props.ErrorMessage} valueCounter={props.valueCounter}
+                            MaxValueNumber={MaxValueNumber}/>
             <div className={'button_box'}>
                 <Button title={'Inc'} onClickFunction={addNumber} disableMod={disableModInc}/>
                 <Button title={'Reset'} onClickFunction={resetNumber} disableMod={disableModReset}/>

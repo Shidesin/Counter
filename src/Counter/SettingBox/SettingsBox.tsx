@@ -1,85 +1,45 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './SettingsBox.module.css'
 import {Button} from '../ButtonBlock';
 import {ValueInput} from './ValueInput';
-import {restoreState, saveState} from '../../App';
 
 
 type SettingCounterPropsType = {
-    callback: (value: Array<number>) => void
+    callbackValueMin: (value: number) => void
+    callbackValueMax: (value: number) => void
     setCounterValue: (value: number) => void
-    callBackError: (value: string) => void
+    disableModSet: () => boolean
+    setButtonFunc: () => void
+    settingValueMax: number
+    settingValueMin: number
+    errorSet: () => void
 }
 
 export function SettingCounter(props: SettingCounterPropsType) {
 
-    const disableModSet = () => {
-        return settingValueMin === null || settingValueMax === null || settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMin === settingValueMax || settingValueMax < 0 ;
-    }
-
-    const initialState = restoreState<Array<number>>('save setting', [0,0])
-    console.log(initialState)
-
-    let [settingValueMin, setSettingValueMin] = useState(initialState[0])
-    let [settingValueMax, setSettingValueMax] = useState(initialState[1])
-
-    const setValue = () => {
-        let array = [settingValueMin, settingValueMax]
-        props.callback(array)
-        props.setCounterValue(settingValueMin)
-        saveState<Array<number>>('save setting',array )
-        props.callBackError('')
-    }
-
     const onCangeValueMin = (event: ChangeEvent<HTMLInputElement>) => {
-        let min = Number(event.currentTarget.value)
-        if (min < 0){
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError("Value can't be less 0")
-        } else if (min > settingValueMax){
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError("Value can't be greater max value")
-        }else if (min === settingValueMax){
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError('Value can\'t be greater than equal max value')
-        } else if (min === null){
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError('Value must be set')
-        }else {
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError('')
-        }
+        props.callbackValueMin(Number(event.currentTarget.value))
+        props.setCounterValue(Number(event.currentTarget.value))
+        props.errorSet()
+
     }
 
     const onCangeValueMax = (event: ChangeEvent<HTMLInputElement>) => {
-        let max = Number(event.currentTarget.value)
-        if (max < 0){
-            setSettingValueMax(Number(event.currentTarget.value))
-            props.callBackError('Value can\'t be less than zero')
-        }else if (max === null){
-            setSettingValueMin(Number(event.currentTarget.value))
-            props.callBackError('Value must be set')
-        } else if (max < settingValueMin){
-            setSettingValueMax(Number(event.currentTarget.value))
-            props.callBackError('The value can\'t be less than min value')
-        } else if (max === settingValueMin){
-            setSettingValueMax(Number(event.currentTarget.value))
-            props.callBackError('Value can\'t be greater than equal mix value')
-        } else if (max > settingValueMin){
-            setSettingValueMax(Number(event.currentTarget.value))
-            props.callBackError('')
-        }
+        props.callbackValueMax(Number(event.currentTarget.value))
+        props.errorSet()
     }
 
     return (
 
         <div className={styles.settingDisplay_box}>
             <div className={styles.settingDisplay}>
-                <ValueInput errorStyle={disableModSet()} value={settingValueMin} onCange={onCangeValueMin} title={'min value'}/>
-                <ValueInput errorStyle={disableModSet()} value={settingValueMax} onCange={onCangeValueMax} title={'max value'}/>
+                <ValueInput errorStyle={props.disableModSet()} value={props.settingValueMin} onCange={onCangeValueMin}
+                            title={'min value'}/>
+                <ValueInput errorStyle={props.disableModSet()} value={props.settingValueMax} onCange={onCangeValueMax}
+                            title={'max value'}/>
             </div>
             <div className={styles.button_box}>
-                <Button title={'Set'} onClickFunction={setValue} disableMod={disableModSet()}/>
+                <Button title={'Set'} onClickFunction={props.setButtonFunc} disableMod={props.disableModSet()}/>
             </div>
         </div>
     )
