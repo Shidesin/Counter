@@ -42,7 +42,10 @@ export function SettingCounter(props: SettingCounterPropsType) {
         }else if (min === settingValueMax){
             setSettingValueMin(Number(event.currentTarget.value))
             props.callBackError('Value can\'t be greater than equal max value')
-        } else {
+        } else if (min === null){
+            setSettingValueMin(Number(event.currentTarget.value))
+            props.callBackError('Value must be set')
+        }else {
             setSettingValueMin(Number(event.currentTarget.value))
             props.callBackError('')
         }
@@ -53,6 +56,9 @@ export function SettingCounter(props: SettingCounterPropsType) {
         if (max < 0){
             setSettingValueMax(Number(event.currentTarget.value))
             props.callBackError('Value can\'t be less than zero')
+        }else if (max === null){
+            setSettingValueMin(Number(event.currentTarget.value))
+            props.callBackError('Value must be set')
         } else if (max < settingValueMin){
             setSettingValueMax(Number(event.currentTarget.value))
             props.callBackError('The value can\'t be less than min value')
