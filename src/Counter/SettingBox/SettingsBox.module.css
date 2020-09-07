@@ -1,0 +1,47 @@
+.settingDisplay_box{
+    border: #06adff 2px solid;
+    border-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.49);
+    padding: 10px;
+    height: max-content;
+    width: max-content;
+    margin-bottom: 50px;
+}
+
+.settingDisplay {
+    vertical-align: center;
+    text-align: center;
+    border-radius: 10px;
+    border: #06adff 2px solid;
+    background: linear-gradient(90deg, #adccee 30%, #7C808080 100%);;
+    /*background-color: #ff8c00;*/
+    padding: 10px;
+}
+
+.titleValue {
+    font-family: "Comic Sans MS", serif;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+
+.input {
+    width: 85px;
+    padding: 5px 10px;
+    border-style: none;
+    border-radius: 15px;
+    margin: 5px;
+    text-align: center;
+    outline: none;
+}
+
+.input_error {
+    box-shadow: 0 0 0 1px #ea0707, 0 0 5px 0 #ff0000;
+}
+
+.button_box {
+    text-align: center;
+    margin-top: 10px;
+    border: #06adff 2px solid;
+    border-radius: 10px;
+}

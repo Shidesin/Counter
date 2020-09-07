@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Counter} from './Counter/Counter';
+import {SettingCounter} from './Counter/SettingBox/SettingsBox';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export function saveState<T>(key: string, state: T) {
+    const stateAsString = JSON.stringify(state);
+    localStorage.setItem(key, stateAsString)
 }
 
-export default App;
+export function restoreState<T>(key: string, defaultState: T) {
+    const stateAsString = localStorage.getItem(key);
+    if (stateAsString !== null) defaultState = JSON.parse(stateAsString) as T;
+    return defaultState;
+}
+
+export function App() {
+
+    let [minMaxValue, setMinMaxValue] = useState<Array<number>>([]);
+
+    let [valueCounter, setCounterValue] = useState<number>(minMaxValue[0]);
+
+    let [error, setError] = useState<string>('Input values and click set')
+
+
+    let callBack = (value: Array<number>) => setMinMaxValue(value);
+
+    const callBackError = (value: string) => setError(value)
+
+
+    return (
+        <div className="App">
+            <SettingCounter
+                callBackError={callBackError}
+                callback={callBack}
+                setCounterValue={setCounterValue}
+            />
+            <Counter
+                minMaxValue={minMaxValue}
+                valueCounter={valueCounter}
+                setCounterValue={setCounterValue}
+                ErrorMessage={error}
+            />
+        </div>
+    );
+}
