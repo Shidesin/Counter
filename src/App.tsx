@@ -33,10 +33,10 @@ export function App() {
     }
 
     const errorSet = () => {
-        if ( settingValueMin < 0 || settingValueMin > settingValueMax  || settingValueMax < 0) {
+        if ( settingValueMin < 0 || settingValueMin > settingValueMax  || settingValueMax < 0 || (settingValueMin === settingValueMax && settingValueMin !== 0))  {
             setError('Incorrect value')
-        } else if(settingValueMin === settingValueMax) {
-            setError("Input values and click 'set'")
+        } else if(settingValueMin === 0 && settingValueMax === 0) {
+            setError("Input values and click 'Set'")
         } else {
             setError('')
         }
