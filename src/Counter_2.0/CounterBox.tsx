@@ -33,20 +33,9 @@ function CounterBox() {
         saveState<Array<number>>('save setting2', array)
     }
 
-    let [error, setError] = useState<string>('Input values and click \'set\'')
-
-    const errorSet = () => {
-        if (settingValueMin < 0 || settingValueMin > settingValueMax || settingValueMax < 0 || (settingValueMin === settingValueMax && settingValueMin !== 0)) {
-            setError('Incorrect value')
-        } else if (settingValueMin === 0 && settingValueMax === 0) {
-            setError('Input values and click \'Set\'')
-        } else {
-            setError('')
-        }
-    }
+    let errorMessage: string = (settingValueMin === 0 && settingValueMax === 0) ? "Click 'Set' and input value": ''
 
     const disableModSet = () => {
-        errorSet()
         return (
             (settingValueMax < 0) ||
             (settingValueMin < 0) ||
@@ -70,7 +59,7 @@ function CounterBox() {
                                settingValueMin={settingValueMin}
                                settingValueMax={settingValueMax}
                                setButtonFunc={setButtonFunc}
-                               ErrorMessage={error}
+                               ErrorMessage={errorMessage}
                            />}
                 />
                 <Route path={'/Counter_2/displaySetCounter'}
@@ -83,7 +72,6 @@ function CounterBox() {
                                setButtonFunc={setButtonFunc}
                                settingValueMin={settingValueMin}
                                settingValueMax={settingValueMax}
-                               errorSet={errorSet}
                            />}
                 />
         </div>

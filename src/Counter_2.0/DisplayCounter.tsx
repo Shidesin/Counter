@@ -53,7 +53,9 @@ const DisplayCounter: React.FC<CounterPropsType> = (props) => {
                     onClickFunction={resetNumber}
                     disableMod={disableModReset}
                 />
-                <NavLink to={'/Counter_2/displaySetCounter'} className={styles.button_link} >Set</NavLink>
+                <NavLink to={'/Counter_2/displaySetCounter'} >
+                    <Button title={'Set'} />
+                </NavLink>
             </div>
         </div>
     )

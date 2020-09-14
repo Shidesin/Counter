@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {NavLink} from 'react-router-dom';
 import {ValueInput} from './ValueInput';
 import styles from './CounterStyle.module.css'
+import {Button} from './Button';
 
 
 type DisplaySetCounterPropsType = {
@@ -12,38 +13,39 @@ type DisplaySetCounterPropsType = {
     setButtonFunc: () => void
     settingValueMax: number
     settingValueMin: number
-    errorSet: () => void
+    errorSet?: () => void
 }
 
 export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
     const onCangeValueMin = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMin(Number(event.currentTarget.value))
         props.setCounterValue(Number(event.currentTarget.value))
-        props.errorSet()
+
 
     }
 
     const onCangeValueMax = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMax(Number(event.currentTarget.value))
-        props.errorSet()
+
     }
+
+    let disableMod = props.disableModSet()
 
     return (
 
         <div className={styles.settingDisplay_box}>
-            <div className={styles.settingDisplay} >
+            <div className={styles.settingDisplay}>
                 <ValueInput errorStyle={props.disableModSet()} value={props.settingValueMin} onCange={onCangeValueMin}
                             title={'min value'}/>
                 <ValueInput errorStyle={props.disableModSet()} value={props.settingValueMax} onCange={onCangeValueMax}
                             title={'max value'}/>
             </div>
-            <div className={styles.button_box_setting} >
+            <div className={styles.button_box_setting}>
                 <div>
                     <NavLink
-                        className={styles.button_link}
-                        onClick={props.setButtonFunc}
-                        to={'/Counter_2/displayCounter'}
-                    >Set</NavLink>
+                        to={'/Counter_2/displayCounter'} >
+                        <Button title={'Set'} onClickFunction={props.setButtonFunc} disableMod={disableMod}/>
+                    </NavLink>
                 </div>
 
             </div>
@@ -52,3 +54,4 @@ export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
 }
 
 
+// aria-disabled={'true'}
