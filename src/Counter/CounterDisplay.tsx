@@ -1,5 +1,5 @@
 import React from 'react';
-/*import limitNumber from './Counter';*/
+import './Counter.css';
 
 
 type PropsType = {

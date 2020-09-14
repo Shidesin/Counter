@@ -1,23 +1,23 @@
 import React from 'react';
-import {CounterDisplay} from './CounterDisplay';
-import {Button} from './ButtonBlock';
-import './Counter.css';
-
+import {NavLink} from 'react-router-dom';
+import {Button} from './Button';
+import {CounterMonitor} from './CounterMonitor';
+import styles from './CounterStyle.module.css'
 
 type CounterPropsType = {
     valueCounter: number
     setCounterValue: (value: number) => void
-    ErrorMessage: string
+    ErrorMessage?: string
     settingValueMin: number
     settingValueMax: number
+    setButtonFunc: () => void
 }
 
-export const Counter = (props: CounterPropsType) => {
 
+const DisplayCounter: React.FC<CounterPropsType> = (props) => {
 
     const MinValueNumber = props.settingValueMin;
     const MaxValueNumber = props.settingValueMax;
-
 
     let disableModInc: boolean = (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter === MaxValueNumber) || (props.valueCounter > MaxValueNumber) ? true : false;
 
@@ -30,19 +30,33 @@ export const Counter = (props: CounterPropsType) => {
     const resetNumber = () => props.setCounterValue(MinValueNumber)
 
 
+
+
+
     return (
-        <div className={'counter_box'}>
-            <CounterDisplay
+        <div className={styles.settingDisplay_box} >
+
+            <CounterMonitor
                 ErrorMessage={props.ErrorMessage}
                 valueCounter={props.valueCounter}
                 MaxValueNumber={MaxValueNumber}
             />
-            <div className={'button_box'}>
-                <Button title={'Inc'} onClickFunction={addNumber} disableMod={disableModInc}/>
-                <Button title={'Reset'} onClickFunction={resetNumber} disableMod={disableModReset}/>
-            </div>
 
+            <div className={styles.button_box}>
+                <Button
+                    title={'Inc'}
+                    onClickFunction={addNumber}
+                    disableMod={disableModInc}
+                />
+                <Button
+                    title={'Reset'}
+                    onClickFunction={resetNumber}
+                    disableMod={disableModReset}
+                />
+                <NavLink to={'/Counter_2/displaySetCounter'} className={styles.button_link} >Set</NavLink>
+            </div>
         </div>
     )
 }
 
+export default DisplayCounter;

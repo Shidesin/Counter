@@ -1,6 +1,5 @@
-import styles from './SettingsBox.module.css';
-// import styles from './CounterStyles.module.css';
 import React, {ChangeEvent} from 'react';
+import styles from './CounterStyle.module.css'
 
 export type ValueInputPropsType = {
     title: string

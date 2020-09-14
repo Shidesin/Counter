@@ -24,7 +24,7 @@ export function App() {
 
     let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
 
-    let [error, setError] = useState<string>("Input values and click 'set'")
+    let [error, setError] = useState<string>("Input values and click 'Set'")
 
     let array = [settingValueMin, settingValueMax]
 

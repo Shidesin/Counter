@@ -1,5 +1,6 @@
 import React from 'react';
-import './Counter.css';
+import styles from './CounterStyle.module.css'
+
 
 type PropsType = {
     title: string
@@ -10,6 +11,6 @@ type PropsType = {
 
 export function Button(props: PropsType) {
     return (
-            <button className={'button'} onClick={props.onClickFunction} disabled={props.disableMod} >{props.title}</button>
+            <button className={styles.button}  onClick={props.onClickFunction} disabled={props.disableMod} >{props.title}</button>
     )
 }

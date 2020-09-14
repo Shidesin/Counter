@@ -1,0 +1,134 @@
+.settingDisplay_box {
+    border: #06adff 2px solid;
+    border-radius: 15px;
+    background-color: rgba(128, 128, 128, 0.49);
+    padding: 10px;
+    height: max-content;
+    width: max-content;
+
+}
+
+.settingDisplay {
+    width: 234px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: #06adff 2px solid;
+    background: linear-gradient(90deg, #adccee 30%, #7C808080 100%);;
+    padding: 10px;
+}
+
+.titleValue {
+    font-family: "Comic Sans MS", serif;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+
+.input {
+    width: 85px;
+    padding: 5px 10px;
+    border-style: none;
+    border-radius: 15px;
+    margin: 5px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.input_error {
+    box-shadow: 0 0 0 1px #ea0707, 0 0 5px 0 #ff0000;
+}
+
+.button_box {
+    text-align: center;
+    margin-top: 10px;
+    border: #06adff 2px solid;
+    border-radius: 10px;
+    height: max-content;
+}
+
+.button_box_setting {
+    text-align: center;
+    margin-top: 10px;
+    border: #06adff 2px solid;
+    border-radius: 10px;
+    height: 41px;
+    padding-top: 15px;
+}
+
+.button {
+    font-family: "Comic Sans MS", serif;
+    font-weight: bold;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #cacaca;
+    padding: .5em 1em;
+    border: 2px #06adff solid;
+    color: black;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #06adff;
+}
+.button:disabled {
+    opacity: 0.5
+}
+.button:disabled:hover {
+    background: none;
+}
+
+
+.button_link {
+    font-family: "Comic Sans MS", serif;
+    outline: none;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #cacaca;
+    padding: .23em 0.7em;
+    border: 2px #06adff solid;
+    color: black;
+    text-decoration: none;
+
+}
+.button_link:hover {
+    background: #06adff;
+}
+.button_link:disabled {
+    opacity: 0.5
+}
+.button_link:disabled:hover {
+    background: none;
+}
+
+.correct_display {
+    width: 234px;
+    height: 100px;
+    font-size: 20px;
+    border: #06adff 2px solid;
+    border-radius: 10px;
+    background: #adccee 30%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.error_display {
+    width: 234px;
+    height: 100px;
+    font-size: 20px;
+    border: #06adff 2px solid;
+    border-radius: 10px;
+    background: #adccee 30%;
+    padding: 10px;
+    color: rgba(255, 0, 0, 0.66);
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
