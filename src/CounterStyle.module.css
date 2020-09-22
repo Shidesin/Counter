@@ -5,7 +5,7 @@
     padding: 10px;
     height: max-content;
     width: max-content;
-
+    margin-bottom: 20px;
 }
 
 .settingDisplay {
@@ -74,9 +74,11 @@
 .button:hover {
     background: #06adff;
 }
+
 .button:disabled {
     opacity: 0.5
 }
+
 .button:disabled:hover {
     background: none;
 }
@@ -94,17 +96,21 @@
     text-decoration: none;
 
 }
+
 .button_link:hover {
     background: #06adff;
 }
+
 .button_link:disabled {
     opacity: 0.5
 }
+
 .button_link:disabled:hover {
     background: none;
 }
 
 .correct_display {
+    font-family: "Comic Sans MS", serif;
     width: 234px;
     height: 100px;
     font-size: 20px;
@@ -118,6 +124,7 @@
 }
 
 .error_display {
+    font-family: "Comic Sans MS", serif;
     width: 234px;
     height: 100px;
     font-size: 20px;

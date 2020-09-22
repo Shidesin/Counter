@@ -2,59 +2,46 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {Button} from './Button';
 import {CounterMonitor} from './CounterMonitor';
-import styles from './CounterStyle.module.css'
+import styles from '../CounterStyle.module.css'
 
 type CounterPropsType = {
     valueCounter: number
-    setCounterValue: (value: number) => void
-    ErrorMessage?: string
-    settingValueMin: number
+    textDisplay?: string | number
     settingValueMax: number
-    setButtonFunc: () => void
+    addNumber: () => void
+    resetNumber: () => void
+    disableModInc: boolean
+    disableModReset: boolean
+    className: string
 }
 
 
 const DisplayCounter: React.FC<CounterPropsType> = (props) => {
 
-    const MinValueNumber = props.settingValueMin;
-    const MaxValueNumber = props.settingValueMax;
-
-    let disableModInc: boolean = (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter < 0 && props.valueCounter < MaxValueNumber) || (props.valueCounter === MaxValueNumber) || (props.valueCounter > MaxValueNumber) ? true : false;
-
-
-    let disableModReset: boolean;
-    props.valueCounter !== MinValueNumber ? disableModReset = false : disableModReset = true;
-
-    const addNumber = () => props.setCounterValue(props.valueCounter + 1)
-
-    const resetNumber = () => props.setCounterValue(MinValueNumber)
-
-
-
-
-
     return (
-        <div className={styles.settingDisplay_box} >
+        <div className={styles.settingDisplay_box}>
 
             <CounterMonitor
-                ErrorMessage={props.ErrorMessage}
+                className={props.className}
+                textDisplay={props.textDisplay}
                 valueCounter={props.valueCounter}
-                MaxValueNumber={MaxValueNumber}
+                MaxValueNumber={props.settingValueMax}
             />
 
             <div className={styles.button_box}>
                 <Button
                     title={'Inc'}
-                    onClickFunction={addNumber}
-                    disableMod={disableModInc}
+                    onClickFunction={props.addNumber}
+                    disableMod={props.disableModInc}
                 />
+
                 <Button
                     title={'Reset'}
-                    onClickFunction={resetNumber}
-                    disableMod={disableModReset}
+                    onClickFunction={props.resetNumber}
+                    disableMod={props.disableModReset}
                 />
-                <NavLink to={'/Counter_2/displaySetCounter'} >
-                    <Button title={'Set'} />
+                <NavLink to={'/Counter_2/displaySetCounter'}>
+                    <Button title={'Set'}/>
                 </NavLink>
             </div>
         </div>

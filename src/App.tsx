@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import './App.css';
+import React from 'react';
+import Header from './Header';
 import {Counter} from './Counter/Counter';
-import {SettingCounter} from './Counter/SettingBox/SettingsBox';
+import Counter2 from './Counter_2.0/Counter2';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 
 export function saveState<T>(key: string, state: T) {
     const stateAsString = JSON.stringify(state);
@@ -16,65 +17,15 @@ export function restoreState<T>(key: string, defaultState: T) {
 
 export function App() {
 
-    const initialState = restoreState<Array<number>>('save setting', [0,0])
+    return(
+        <HashRouter>
+            <Header/>
+            <Switch>
+                <Route path={'/'} exact render={() => <Redirect to={'/Counter'}/>}/>
+                <Route path={'/Counter'} render={() => <Counter/>}/>
+                <Route path={'/Counter_2'} render={() => <Counter2/>}/>
+            </Switch>
+        </HashRouter>
+    )
 
-    let [settingValueMin, setSettingValueMin] = useState(initialState[0])
-
-    let [settingValueMax, setSettingValueMax] = useState(initialState[1])
-
-    let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
-
-    let [error, setError] = useState<string>("Input values and click 'Set'")
-
-    let array = [settingValueMin, settingValueMax]
-
-    const setButtonFunc = () => {
-        saveState<Array<number>>('save setting',array )
-    }
-
-    const errorSet = () => {
-        if ( settingValueMin < 0 || settingValueMin > settingValueMax  || settingValueMax < 0 || (settingValueMin === settingValueMax && settingValueMin !== 0))  {
-            setError('Incorrect value')
-        } else if(settingValueMin === 0 && settingValueMax === 0) {
-            setError("Input values and click 'Set'")
-        } else {
-            setError('')
-        }
-    }
-
-    const disableModSet = () => {
-        errorSet()
-        return (
-            (settingValueMax < 0) ||
-            (settingValueMin < 0) ||
-            (settingValueMin > settingValueMax) ||
-            (settingValueMin === settingValueMax) ||
-            (settingValueMax === 0 && settingValueMin < 0) ||
-            (settingValueMax < 0 && settingValueMin < 0) ||
-            (settingValueMax > 0 && settingValueMin < 0) ||
-            (settingValueMax > 0 && settingValueMin < 0)
-        )
-    }
-
-    return (
-        <div className="App">
-            <SettingCounter
-                callbackValueMin={setSettingValueMin}
-                callbackValueMax={setSettingValueMax}
-                setCounterValue={setCounterValue}
-                disableModSet={disableModSet}
-                setButtonFunc={setButtonFunc}
-                settingValueMin={settingValueMin}
-                settingValueMax={settingValueMax}
-                errorSet={errorSet}
-            />
-            <Counter
-                valueCounter={valueCounter}
-                setCounterValue={setCounterValue}
-                ErrorMessage={error}
-                settingValueMin={settingValueMin}
-                settingValueMax={settingValueMax}
-            />
-        </div>
-    );
 }

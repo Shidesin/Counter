@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './CounterStyle.module.css'
+import styles from '../CounterStyle.module.css'
 
 
 type PropsType = {
     title: string
     onClickFunction?: () => void
     disableMod?: boolean
-
 }
 
 
