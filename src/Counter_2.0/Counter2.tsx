@@ -9,7 +9,7 @@ import styles from '../CounterStyle.module.css';
 
 function Counter2() {
 
-    const initialState = restoreState<Array<number>>(`${Counter2}`, [0, 0])
+    const initialState = restoreState<Array<number>>('Counter2', [0, 0])
 
     let [settingValueMin, setSettingValueMin] = useState(initialState[0])
 
@@ -18,7 +18,7 @@ function Counter2() {
     let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
 
     const setButtonFunc = () => {
-        saveState<Array<number>>(`${Counter2}`, [settingValueMin, settingValueMax])
+        saveState<Array<number>>('Counter2', [settingValueMin, settingValueMax])
     }
 
     const addNumber = () => setCounterValue(valueCounter + 1)

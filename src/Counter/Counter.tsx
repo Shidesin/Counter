@@ -8,7 +8,9 @@ import {DisplaySetCounter} from '../Counter_2.0/DisplaySetCounter';
 
 export function Counter() {
 
-    const initialState = restoreState<Array<number>>(`${Counter}`, [0, 0])
+    const initialState = restoreState<Array<number>>('Counter', [0, 0])
+
+    // let [[setValueMin, setValueMax], setValue] = useState(initialState)
 
     let [settingValueMin, setSettingValueMin] = useState(initialState[0])
 
@@ -19,7 +21,7 @@ export function Counter() {
     let [error, setError] = useState<string>('Input values and click \'Set\'')
 
     const setButtonFunc = () => {
-        saveState<Array<number>>(`${Counter}`, [settingValueMin, settingValueMax])
+        saveState<Array<number>>('Counter', [settingValueMin, settingValueMax])
     }
 
     const addNumber = () => setCounterValue(valueCounter + 1)

@@ -11,7 +11,7 @@ function Header() {
                     <NavLink to={'/Counter'} activeClassName={styles.activeLink}>Counter</NavLink>
                 </span>
                 <span className={styles.header_block_button}>
-                    <NavLink to={'/Counter_2/displayCounter'} activeClassName={styles.activeLink}>Counter 2</NavLink>
+                    <NavLink  to={'/Counter_2/displayCounter'} activeClassName={styles.activeLink}>Counter 2</NavLink>
                 </span>
             </div>
         </nav>
