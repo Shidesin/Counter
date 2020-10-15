@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import DisplayCounter from './DisplayCounter';
+import DisplayCounter_2 from './DisplayCounter_2';
 import './../App.css';
 import {Route} from 'react-router-dom';
-import {DisplaySetCounter} from './DisplaySetCounter';
+import {DisplaySetCounter_2} from './DisplaySetCounter_2';
 import {restoreState, saveState} from '../App';
 import styles from '../CounterStyle.module.css';
 
@@ -51,12 +51,13 @@ function Counter2() {
 
     let errorStyleValueInput = disableModSet() ? `${styles.input} ${styles.input_error}`: `${styles.input}`
 
+
     return (
 
         <div className="App">
             <Route path={'/Counter_2/displayCounter'}
                    render={() =>
-                       <DisplayCounter
+                       <DisplayCounter_2
                            valueCounter={valueCounter}
                            textDisplay={textDisplay}
                            settingValueMax={settingValueMax}
@@ -69,7 +70,7 @@ function Counter2() {
             />
             <Route path={'/Counter_2/displaySetCounter'}
                    render={() =>
-                       <DisplaySetCounter
+                       <DisplaySetCounter_2
                            callbackValueMin={setSettingValueMin}
                            callbackValueMax={setSettingValueMax}
                            setCounterValue={setCounterValue}

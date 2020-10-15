@@ -1,15 +1,14 @@
 import React, {ChangeEvent} from 'react';
-import {NavLink} from 'react-router-dom';
-import {ValueInput} from './ValueInput';
 import styles from '../CounterStyle.module.css'
-import {Button} from './Button';
+import {ValueInput} from '../Counter_2.0/ValueInput';
+import {Button} from '../Counter_2.0/Button';
 
 
 type DisplaySetCounterPropsType = {
     callbackValueMin: (value: number) => void
     callbackValueMax: (value: number) => void
     setCounterValue: (value: number) => void
-    disableModSet:() => boolean
+    disableModSet: () => boolean
     setButtonFunc: () => void
     settingValueMax: number
     settingValueMin: number
@@ -41,10 +40,7 @@ export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
             </div>
             <div className={styles.button_box_setting}>
                 <div>
-                    <NavLink
-                        to={'/Counter_2/displayCounter'} >
-                        <Button title={'Set'} onClickFunction={props.setButtonFunc} disableMod={props.disableModSet()}/>
-                    </NavLink>
+                    <Button title={'Set'} onClickFunction={props.setButtonFunc} disableMod={props.disableModSet()}/>
                 </div>
 
             </div>
@@ -53,4 +49,3 @@ export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
 }
 
 
-// aria-disabled={'true'}

@@ -1,8 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import {Button} from './Button';
-import {CounterMonitor} from './CounterMonitor';
 import styles from '../CounterStyle.module.css'
+import {CounterMonitor} from './CounterMonitor';
+import {Button} from '../Counter_2.0/Button';
 
 type CounterPropsType = {
     valueCounter: number
@@ -16,7 +15,7 @@ type CounterPropsType = {
 }
 
 
-const DisplayCounter: React.FC<CounterPropsType> = (props) => {
+export const DisplayCounter: React.FC<CounterPropsType> = (props) => {
 
     return (
         <div className={styles.settingDisplay_box}>
@@ -40,12 +39,7 @@ const DisplayCounter: React.FC<CounterPropsType> = (props) => {
                     onClickFunction={props.resetNumber}
                     disableMod={props.disableModReset}
                 />
-                <NavLink to={'/Counter_2/displaySetCounter'}>
-                    <Button title={'Set'}/>
-                </NavLink>
             </div>
         </div>
     )
 }
-
-export default DisplayCounter;

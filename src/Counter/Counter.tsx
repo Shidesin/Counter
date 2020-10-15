@@ -2,15 +2,13 @@ import React, {useState} from 'react';
 import '.././App.css';
 import {restoreState, saveState} from '../App';
 import styles from '../CounterStyle.module.css';
-import DisplayCounter from '../Counter_2.0/DisplayCounter';
-import {DisplaySetCounter} from '../Counter_2.0/DisplaySetCounter';
+import {DisplaySetCounter} from './DisplaySetCounter';
+import {DisplayCounter} from './DisplayCounter';
 
 
 export function Counter() {
 
-    const initialState = restoreState<Array<number>>('Counter', [0, 0])
-
-    // let [[setValueMin, setValueMax], setValue] = useState(initialState)
+    const initialState = restoreState('Counter', [0, 0])
 
     let [settingValueMin, setSettingValueMin] = useState(initialState[0])
 
@@ -18,7 +16,7 @@ export function Counter() {
 
     let [valueCounter, setCounterValue] = useState<number>(settingValueMin);
 
-    let [error, setError] = useState<string>('Input values and click \'Set\'')
+    let [error, setError] = useState<string>("Input values and click 'Set'")
 
     const setButtonFunc = () => {
         saveState<Array<number>>('Counter', [settingValueMin, settingValueMax])
@@ -42,6 +40,7 @@ export function Counter() {
     }
 
     let disableModInc: boolean =
+        (valueCounter >= settingValueMax) ||
         (settingValueMax < 0) ||
         (settingValueMin < 0) ||
         (settingValueMin > settingValueMax) ||
