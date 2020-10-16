@@ -1,77 +1,87 @@
-type initialStateType = {
+import {restoreState} from '../App';
+
+const SET_MIN_VALUE = 'SET_MIN_VALUE'
+const SET_MAX_VALUE = 'SET_MAX_VALUE'
+const INC_COUNTER_VALUE = 'INC_COUNTER_VALUE'
+const RESET_COUNTER_VALUE = 'RESET_COUNTER_VALUE'
+const SET_ERROR = 'SET_ERROR'
+
+
+export  type initialStateType = {
     settingValueMin: number
     settingValueMax: number
     valueCounter: number
     error: string
 }
 
-let initialState: initialStateType = {settingValueMin: 0, settingValueMax: 0, valueCounter: 0, error: ''}
+// let initialState: initialStateType = restoreState<initialStateType> ('Counter',{settingValueMin: 0, settingValueMax: 0, valueCounter: 0, error: 'Input values and click "Set"'})
+let initialState: initialStateType = {settingValueMin: 0, settingValueMax: 0, valueCounter: 0, error: 'Input values and click "Set"'}
 
 
-export const counterReducer = (state: initialStateType = initialState, action: ActionType) => {
+export const counterReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
-        case'INCREASING_MIN_VALUE':
-            return {...state, settingValueMin: +1}
-        case 'DECREASING_MIN_VALUE':
-            return {...state, settingValueMin: -1}
-        case 'INCREASING_MAX_VALUE':
-            return {...state, settingValueMax: +1}
-        case 'DECREASING_MAX_VALUE':
-            return {...state, settingValueMax: -1}
-        case 'ERROR_SET':
+        case 'SET_MIN_VALUE':
+            return {...state, settingValueMin: action.payload, valueCounter: action.payload}
+        case 'SET_MAX_VALUE':
+            return {...state, settingValueMax: action.payload}
+        case 'INC_COUNTER_VALUE':
+            return {...state, valueCounter: state.valueCounter + 1}
+        case 'RESET_COUNTER_VALUE':
+            return {...state, valueCounter: state.settingValueMin}
+        case 'SET_ERROR':
             return {...state, error: action.payload}
-        case 'INCREASING_VALUE_COUNTER':
-            return {...state, valueCounter: +1}
-        default: return state
+        default:
+            return state
     }
 }
 
-type ActionType = increasingMinValueType | decreasingMinValueType | increasingMaxValueType| decreasingMaxValueType| increasingValueCounterType| errorSetType
+type ActionType =
+    setMinValueType
+    | setMaxValueType
+    | incrementCounterValueType
+    | resetCounterValueType
+    | setErrorType
 
-type increasingMinValueType = {
-    type: 'INCREASING_MIN_VALUE'
+type setMinValueType = {
+    type: 'SET_MIN_VALUE'
+    payload: number
 }
 
-type decreasingMinValueType = {
-    type: 'DECREASING_MIN_VALUE'
+type setMaxValueType = {
+    type: 'SET_MAX_VALUE'
+    payload: number
 }
 
-type increasingMaxValueType = {
-    type: 'INCREASING_MAX_VALUE'
+type incrementCounterValueType = {
+    type: 'INC_COUNTER_VALUE'
 }
 
-type decreasingMaxValueType = {
-    type: 'DECREASING_MAX_VALUE'
+type resetCounterValueType = {
+    type: 'RESET_COUNTER_VALUE'
 }
 
-type increasingValueCounterType = {
-    type: 'INCREASING_VALUE_COUNTER'
-}
-type errorSetType = {
-    type: 'ERROR_SET'
+type setErrorType = {
+    type: 'SET_ERROR'
     payload: string
 }
 
-export const increasingMinValue = (): increasingMinValueType => {
-    return {type: 'INCREASING_MIN_VALUE'}
+
+export const setMinValue = (minValue: number): setMinValueType => {
+    return {type: SET_MIN_VALUE, payload: minValue}
 }
 
-export const decreasingMinValue = (): decreasingMinValueType => {
-    return {type: 'DECREASING_MIN_VALUE'}
+export const setMaxValue = (maxValue: number): setMaxValueType => {
+    return {type: SET_MAX_VALUE, payload: maxValue}
 }
 
-export const increasingMaxValue = (): increasingMaxValueType => {
-    return {type: 'INCREASING_MAX_VALUE'}
+export const incrementCounterValue = (): incrementCounterValueType => {
+    return {type: INC_COUNTER_VALUE}
 }
 
-export const decreasingMaxValue = (): decreasingMaxValueType => {
-    return {type: 'DECREASING_MAX_VALUE'}
+export const resetCounterValue = (): resetCounterValueType => {
+    return {type: RESET_COUNTER_VALUE}
 }
 
-export const increasingValueCounter = (): increasingValueCounterType => {
-    return {type: 'INCREASING_VALUE_COUNTER'}
-}
-
-export const errorSet = (payload: string): errorSetType => {
-    return {type: 'ERROR_SET', payload}
+export const setError = (textError:string): setErrorType => {
+    return {type: SET_ERROR, payload: textError}
 }

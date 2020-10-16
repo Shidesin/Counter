@@ -7,26 +7,26 @@ import {Button} from '../Counter_2.0/Button';
 type DisplaySetCounterPropsType = {
     callbackValueMin: (value: number) => void
     callbackValueMax: (value: number) => void
-    setCounterValue: (value: number) => void
     disableModSet: () => boolean
     setButtonFunc: () => void
     settingValueMax: number
     settingValueMin: number
-    errorSet?: () => void
+    errorSet?: (settingValueMin: number, settingValueMax: number) => void
     className: string
 }
 
 export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
 
+
+
     const onCangeValueMin = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMin(Number(event.currentTarget.value))
-        props.setCounterValue(Number(event.currentTarget.value))
-        props.errorSet && props.errorSet()
+        props.errorSet && props.errorSet(+onCangeValueMin,+onCangeValueMax)
     }
 
     const onCangeValueMax = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMax(Number(event.currentTarget.value))
-        props.errorSet && props.errorSet()
+        props.errorSet && props.errorSet(+onCangeValueMin,+onCangeValueMax)
     }
 
     return (

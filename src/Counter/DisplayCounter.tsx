@@ -23,8 +23,8 @@ export const DisplayCounter: React.FC<CounterPropsType> = (props) => {
             <CounterMonitor
                 className={props.className}
                 textDisplay={props.textDisplay}
-                valueCounter={props.valueCounter}
-                MaxValueNumber={props.settingValueMax}
+                // valueCounter={props.valueCounter}
+                // MaxValueNumber={props.settingValueMax}
             />
 
             <div className={styles.button_box}>

@@ -2,8 +2,8 @@ import React from 'react';
 
 
 type PropsType = {
-    valueCounter: number
-    MaxValueNumber: number
+    // valueCounter: number
+    // MaxValueNumber: number
     textDisplay?: string | number
     className: string
 }
