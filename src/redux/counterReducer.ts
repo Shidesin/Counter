@@ -1,5 +1,3 @@
-import {restoreState} from '../App';
-
 const SET_MIN_VALUE = 'SET_MIN_VALUE'
 const SET_MAX_VALUE = 'SET_MAX_VALUE'
 const INC_COUNTER_VALUE = 'INC_COUNTER_VALUE'
@@ -14,7 +12,6 @@ export  type initialStateType = {
     error: string
 }
 
-// let initialState: initialStateType = restoreState<initialStateType> ('Counter',{settingValueMin: 0, settingValueMax: 0, valueCounter: 0, error: 'Input values and click "Set"'})
 let initialState: initialStateType = {settingValueMin: 0, settingValueMax: 0, valueCounter: 0, error: 'Input values and click "Set"'}
 
 

@@ -2,6 +2,8 @@ import React, {ChangeEvent} from 'react';
 import styles from '../CounterStyle.module.css'
 import {ValueInput} from '../Counter_2.0/ValueInput';
 import {Button} from '../Counter_2.0/Button';
+import {useDispatch} from 'react-redux';
+import {setError} from '../redux/counterReducer';
 
 
 type DisplaySetCounterPropsType = {
@@ -11,24 +13,41 @@ type DisplaySetCounterPropsType = {
     setButtonFunc: () => void
     settingValueMax: number
     settingValueMin: number
-    errorSet?: (settingValueMin: number, settingValueMax: number) => void
     className: string
 }
 
 export function DisplaySetCounter(props: DisplaySetCounterPropsType) {
 
-
+    let dispatch = useDispatch()
 
     const onCangeValueMin = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMin(Number(event.currentTarget.value))
-        props.errorSet && props.errorSet(+onCangeValueMin,+onCangeValueMax)
+        if (Number(event.currentTarget.value) < 0 ||
+            Number(event.currentTarget.value) > props.settingValueMax ||
+            props.settingValueMax < 0 ||
+            (Number(event.currentTarget.value) === props.settingValueMax && Number(event.currentTarget.value) !== 0)) {
+            dispatch(setError('Incorrect value'))
+        } else if (Number(event.currentTarget.value) === 0 && props.settingValueMax === 0) {
+            dispatch(setError('Input values and click "Set"'))
+        } else {
+            dispatch(setError(''))
+        }
+
     }
 
     const onCangeValueMax = (event: ChangeEvent<HTMLInputElement>) => {
         props.callbackValueMax(Number(event.currentTarget.value))
-        props.errorSet && props.errorSet(+onCangeValueMin,+onCangeValueMax)
+        if (props.settingValueMin < 0 ||
+            props.settingValueMin > Number(event.currentTarget.value) ||
+            Number(event.currentTarget.value) < 0 ||
+            (props.settingValueMin === Number(event.currentTarget.value) && props.settingValueMin !== 0)) {
+            dispatch(setError('Incorrect value'))
+        } else if (props.settingValueMin === 0 && Number(event.currentTarget.value) === 0) {
+            dispatch(setError('Input values and click "Set"'))
+        } else {
+            dispatch(setError(''))
+        }
     }
-
     return (
 
         <div className={styles.settingDisplay_box}>
